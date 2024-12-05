@@ -1,5 +1,9 @@
+from pyexpat.errors import messages
+
 import functions
 import time
+
+from gui import new_todo
 
 now = time.strftime("%b %d, %Y %H:%M:%S")
 print("It is", now)
@@ -16,4 +20,43 @@ while True:
     elif user_action.startswith("show"):
         todos = functions.get_todos()
 
-        #for index, item
+        for index, item in enumerate(todos):
+            item = item.strip("\n")
+            row = f"{index + 1}-{item}"
+            print(row)
+
+    elif user_action.startswith("edit"):
+        try:
+            number = int(user_action[5:])
+            print(number)
+
+            number-=number
+            todos = functions.get_todos()
+            new_todo = input("Enter the todo : ")
+            todos[number] = new_todo + "\n"
+        except ValueError:
+            print("Yor command is not valid.")
+            continue
+
+    elif user_action.startswith("complete"):
+        try:
+            number = int(user_action[9:])
+
+            todos = functions.get_todos()
+            index = number - 1
+            todo_to_remove = todos[index].strip("\n")
+            todos.pop(index)
+
+            functions.write_todos(todos)
+            message = f"ToDo {todo_to_remove} was removed"
+            print(message)
+        except IndexError:
+            print("There is no item with that number.")
+            continue
+
+    elif user_action.startswith("exit"):
+        break
+    else:
+        print("Command is nit valid")
+
+print("Bye!")

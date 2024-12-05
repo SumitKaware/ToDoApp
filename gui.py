@@ -19,8 +19,9 @@ window = sg.Window('My ToDo App',
 
 while True:
     event, values = window.read()
-    print(event)
-    print(values)
+    print(1, event)
+    print(2, values)
+    print(3, values['todo'])
     match event:
         case "Add Item":
             todos = functions.get_todos()
