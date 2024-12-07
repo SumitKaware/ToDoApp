@@ -2,9 +2,3 @@ do
 what
 net
 baby
-stop
-jau
-jaukanlso
-ghn
-rdk
-rdk
