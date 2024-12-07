@@ -66,7 +66,10 @@ while True:
         case "Exit":
             break
         case "todos":
-            window['todo'].update(value=values['todos'][0])
+            try:
+                window['todo'].update(value=values['todos'][0])
+            except IndexError:
+                sg.popup("Please select an item.", font=('Helvetica',20))
         case sg.WIN_CLOSED:
             break
 
